@@ -1,0 +1,1422 @@
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Trắc nghiệm: Span – Không gian sinh bởi các vectơ (Phương pháp DUYMT)</title>
+    <!-- MathJax 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+    <style>body { margin: 0; }</style><style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef2f7;
+            color: #1e2a3e;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            padding: 24px 28px;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            color: #00509e;
+            border-left: 6px solid #ff8c42;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .sub {
+            color: #2c5282;
+            margin-bottom: 30px;
+            font-style: italic;
+            padding-left: 26px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #e6f0fa;
+            padding: 12px 20px;
+            border-radius: 60px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .score {
+            font-weight: bold;
+            background: #00509e;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+        }
+
+        .btn-download {
+            background: #2b6e3c;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-download:hover {
+            background: #1f4e2d;
+            transform: scale(0.98);
+        }
+
+        .reset-btn {
+            background: #b91c1c;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+
+        .question-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            border: 1px solid #dce9f5;
+            transition: 0.1s;
+        }
+
+        .question-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-lythuyet { background: #b0c4de; color: #003366; }
+        .badge-de { background: #b5ead7; color: #0a5c2e; }
+        .badge-trungbinh { background: #ffe5b4; color: #a45400; }
+        .badge-kho { background: #fbc4c4; color: #9b2c2c; }
+
+        .question-text {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.45;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f9fafc;
+            padding: 10px 16px;
+            border-radius: 60px;
+            border: 1px solid #e2edf7;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .option:hover {
+            background: #eef4ff;
+            border-color: #8bb3d4;
+        }
+
+        .option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #1e6f3f;
+        }
+
+        .option label {
+            font-size: 0.98rem;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .feedback {
+            margin-top: 16px;
+            padding: 14px 18px;
+            border-radius: 24px;
+            background: #f8fafc;
+            border-left: 5px solid #94a3b8;
+            font-size: 0.92rem;
+        }
+
+        .feedback.correct {
+            background: #e0f2e9;
+            border-left-color: #2c8c5a;
+        }
+
+        .feedback.wrong {
+            background: #ffe6e5;
+            border-left-color: #d9534f;
+        }
+
+        .feedback .ans {
+            font-weight: bold;
+        }
+
+        .tip {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #3b5e7a;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #4b6b8f;
+        }
+
+        @media (max-width: 680px) {
+            .container { padding: 16px; }
+            .stats-bar { flex-direction: column; gap: 10px; align-items: stretch; }
+            .option label { font-size: 0.9rem; }
+        }
+    </style>
+<style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+<body>
+<div class="container" id="app">
+    <h1>📐 Span – Không gian sinh bởi các vectơ</h1>
+    <div class="sub">🧠 “Từ một vài vectơ, pha trộn đúng cách – ta được cả một không gian” — Dr.rer.nat Duymt</div>
+
+    <div class="stats-bar">
+        <div>📌 20 câu hỏi | ✅ Chọn đáp án – hiện giải thích + mẹo nhanh</div>
+        <div style="display: flex; gap: 12px;">
+            <span class="score" id="scoreDisplay">0 / 20</span>
+            <button class="btn-download" id="downloadBtn">📥 Tải đề thi (HTML)</button>
+            <button class="reset-btn" id="resetBtn">🔄 Làm lại</button>
+        </div>
+    </div>
+
+    <div id="questionsContainer"><div class="question-card" data-idx="0">
+                <div class="question-title">
+                    <span class="badge badge-lythuyet">Lý thuyết</span>
+                    <span style="font-weight:600;">Câu 1.</span>
+                </div>
+                <div class="question-text">(Span (bao tuyến tính) của một tập hợp các vectơ là gì?)</div>
+                <div class="options" data-qidx="0">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q0" value="0" id="q0_opt0">
+                        <label for="q0_opt0">A. (Tập hợp các vectơ vuông góc với chúng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q0" value="1" id="q0_opt1">
+                        <label for="q0_opt1">B. (Tập hợp tất cả các tổ hợp tuyến tính của chúng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q0" value="2" id="q0_opt2">
+                        <label for="q0_opt2">C. (Tập hợp các vectơ có độ dài bằng 1)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q0" value="3" id="q0_opt3">
+                        <label for="q0_opt3">D. (Tập hợp các vectơ song song với nhau)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="1">
+                <div class="question-title">
+                    <span class="badge badge-lythuyet">Lý thuyết</span>
+                    <span style="font-weight:600;">Câu 2.</span>
+                </div>
+                <div class="question-text">(Phát biểu nào sau đây đúng về span của một vectơ (ec{v} 
+eq ec{0}) trong (mathbb{R}^2)?)</div>
+                <div class="options" data-qidx="1">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q1" value="0" id="q1_opt0">
+                        <label for="q1_opt0">A. (Span là toàn bộ mặt phẳng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q1" value="1" id="q1_opt1">
+                        <label for="q1_opt1">B. (Span là đường thẳng đi qua gốc tọa độ theo hướng (ec{v}))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q1" value="2" id="q1_opt2">
+                        <label for="q1_opt2">C. (Span chỉ gồm vectơ (ec{v}))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q1" value="3" id="q1_opt3">
+                        <label for="q1_opt3">D. (Span là một điểm)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="2">
+                <div class="question-title">
+                    <span class="badge badge-lythuyet">Lý thuyết</span>
+                    <span style="font-weight:600;">Câu 3.</span>
+                </div>
+                <div class="question-text">(Nếu thêm một vectơ đã thuộc span của tập hợp ban đầu vào tập đó, span mới như thế nào?)</div>
+                <div class="options" data-qidx="2">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q2" value="0" id="q2_opt0">
+                        <label for="q2_opt0">A. (Mở rộng ra không gian lớn hơn)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q2" value="1" id="q2_opt1">
+                        <label for="q2_opt1">B. (Thu hẹp lại)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q2" value="2" id="q2_opt2">
+                        <label for="q2_opt2">C. (Không thay đổi)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q2" value="3" id="q2_opt3">
+                        <label for="q2_opt3">D. (Trở thành không gian 0)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="3">
+                <div class="question-title">
+                    <span class="badge badge-lythuyet">Lý thuyết</span>
+                    <span style="font-weight:600;">Câu 4.</span>
+                </div>
+                <div class="question-text">(Điều kiện cần và đủ để hệ phương trình (Amathbf{x} = mathbf{b}) có nghiệm là:)</div>
+                <div class="options" data-qidx="3">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q3" value="0" id="q3_opt0">
+                        <label for="q3_opt0">A. ((mathbf{b} = mathbf{0}))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q3" value="1" id="q3_opt1">
+                        <label for="q3_opt1">B. ((mathbf{b}) vuông góc với mọi cột của A)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q3" value="2" id="q3_opt2">
+                        <label for="q3_opt2">C. ((mathbf{b}) thuộc span của các cột của A)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q3" value="3" id="q3_opt3">
+                        <label for="q3_opt3">D. (A phải là ma trận vuông)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="4">
+                <div class="question-title">
+                    <span class="badge badge-lythuyet">Lý thuyết</span>
+                    <span style="font-weight:600;">Câu 5.</span>
+                </div>
+                <div class="question-text">(Trong không gian (mathbb{R}^3), span của ba vectơ ({(1,0,0), (0,1,0), (0,0,1)}) là gì?)</div>
+                <div class="options" data-qidx="4">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q4" value="0" id="q4_opt0">
+                        <label for="q4_opt0">A. (Một mặt phẳng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q4" value="1" id="q4_opt1">
+                        <label for="q4_opt1">B. (Một đường thẳng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q4" value="2" id="q4_opt2">
+                        <label for="q4_opt2">C. (Toàn bộ (mathbb{R}^3))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q4" value="3" id="q4_opt3">
+                        <label for="q4_opt3">D. (Chỉ gốc tọa độ)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="5">
+                <div class="question-title">
+                    <span class="badge badge-de">Dễ</span>
+                    <span style="font-weight:600;">Câu 6.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^2), cho (ec{u} = (1, 2)). Span của (ec{u}) là:)</div>
+                <div class="options" data-qidx="5">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q5" value="0" id="q5_opt0">
+                        <label for="q5_opt0">A. (Đường thẳng (y = 2x))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q5" value="1" id="q5_opt1">
+                        <label for="q5_opt1">B. (Đường thẳng (y = x))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q5" value="2" id="q5_opt2">
+                        <label for="q5_opt2">C. (Mặt phẳng (mathbb{R}^2))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q5" value="3" id="q5_opt3">
+                        <label for="q5_opt3">D. (Điểm (0,0))</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="6">
+                <div class="question-title">
+                    <span class="badge badge-de">Dễ</span>
+                    <span style="font-weight:600;">Câu 7.</span>
+                </div>
+                <div class="question-text">(Cho (ec{v}_1 = (2, 4)) và (ec{v}_2 = (3, 6)). Span của hai vectơ này là:)</div>
+                <div class="options" data-qidx="6">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q6" value="0" id="q6_opt0">
+                        <label for="q6_opt0">A. (Toàn bộ (mathbb{R}^2))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q6" value="1" id="q6_opt1">
+                        <label for="q6_opt1">B. (Một đường thẳng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q6" value="2" id="q6_opt2">
+                        <label for="q6_opt2">C. (Một mặt phẳng)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q6" value="3" id="q6_opt3">
+                        <label for="q6_opt3">D. (Gốc tọa độ)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="7">
+                <div class="question-title">
+                    <span class="badge badge-de">Dễ</span>
+                    <span style="font-weight:600;">Câu 8.</span>
+                </div>
+                <div class="question-text">(Vectơ (mathbf{b} = (4, -2)) có thuộc span({(1, 0), (0, 1)}) không?)</div>
+                <div class="options" data-qidx="7">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q7" value="0" id="q7_opt0">
+                        <label for="q7_opt0">A. (Có)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q7" value="1" id="q7_opt1">
+                        <label for="q7_opt1">B. (Không)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q7" value="2" id="q7_opt2">
+                        <label for="q7_opt2">C. (Chỉ khi nhân với 0)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q7" value="3" id="q7_opt3">
+                        <label for="q7_opt3">D. (Không xác định)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="8">
+                <div class="question-title">
+                    <span class="badge badge-de">Dễ</span>
+                    <span style="font-weight:600;">Câu 9.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^3), span của ({(1,0,0), (0,1,0)}) là:)</div>
+                <div class="options" data-qidx="8">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q8" value="0" id="q8_opt0">
+                        <label for="q8_opt0">A. (Mặt phẳng Oxy)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q8" value="1" id="q8_opt1">
+                        <label for="q8_opt1">B. (Đường thẳng Oz)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q8" value="2" id="q8_opt2">
+                        <label for="q8_opt2">C. (Toàn bộ (mathbb{R}^3))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q8" value="3" id="q8_opt3">
+                        <label for="q8_opt3">D. (Gốc tọa độ)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="9">
+                <div class="question-title">
+                    <span class="badge badge-de">Dễ</span>
+                    <span style="font-weight:600;">Câu 10.</span>
+                </div>
+                <div class="question-text">(Cho (S = {ec{v}_1, ec{v}_2, ec{v}_3}) trong (mathbb{R}^2). Số chiều tối đa của span(S) có thể là:)</div>
+                <div class="options" data-qidx="9">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q9" value="0" id="q9_opt0">
+                        <label for="q9_opt0">A. (1)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q9" value="1" id="q9_opt1">
+                        <label for="q9_opt1">B. (2)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q9" value="2" id="q9_opt2">
+                        <label for="q9_opt2">C. (3)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q9" value="3" id="q9_opt3">
+                        <label for="q9_opt3">D. (0)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="10">
+                <div class="question-title">
+                    <span class="badge badge-trungbinh">Trung bình</span>
+                    <span style="font-weight:600;">Câu 11.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^2), cho (ec{u} = (2, 1)) và (ec{v} = (-1, 3)). Hãy tìm span của chúng.)</div>
+                <div class="options" data-qidx="10">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q10" value="0" id="q10_opt0">
+                        <label for="q10_opt0">A. (Đường thẳng (y = x/2))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q10" value="1" id="q10_opt1">
+                        <label for="q10_opt1">B. (Đường thẳng (y = -3x))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q10" value="2" id="q10_opt2">
+                        <label for="q10_opt2">C. (Toàn bộ (mathbb{R}^2))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q10" value="3" id="q10_opt3">
+                        <label for="q10_opt3">D. (Một điểm)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="11">
+                <div class="question-title">
+                    <span class="badge badge-trungbinh">Trung bình</span>
+                    <span style="font-weight:600;">Câu 12.</span>
+                </div>
+                <div class="question-text">(Xác định xem vectơ (mathbf{b} = (3, 2, 1)) có thuộc span({(1,0,0), (0,1,0)}) không?)</div>
+                <div class="options" data-qidx="11">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q11" value="0" id="q11_opt0">
+                        <label for="q11_opt0">A. (Có)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q11" value="1" id="q11_opt1">
+                        <label for="q11_opt1">B. (Không)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q11" value="2" id="q11_opt2">
+                        <label for="q11_opt2">C. (Chỉ khi bỏ tọa độ cuối)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q11" value="3" id="q11_opt3">
+                        <label for="q11_opt3">D. (Có thể)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="12">
+                <div class="question-title">
+                    <span class="badge badge-trungbinh">Trung bình</span>
+                    <span style="font-weight:600;">Câu 13.</span>
+                </div>
+                <div class="question-text">(Cho (ec{v}_1 = (1,1,1)), (ec{v}_2 = (1,-1,0)). Span của hai vectơ này trong (mathbb{R}^3) có số chiều là:)</div>
+                <div class="options" data-qidx="12">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q12" value="0" id="q12_opt0">
+                        <label for="q12_opt0">A. (1)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q12" value="1" id="q12_opt1">
+                        <label for="q12_opt1">B. (2)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q12" value="2" id="q12_opt2">
+                        <label for="q12_opt2">C. (3)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q12" value="3" id="q12_opt3">
+                        <label for="q12_opt3">D. (0)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="13">
+                <div class="question-title">
+                    <span class="badge badge-trungbinh">Trung bình</span>
+                    <span style="font-weight:600;">Câu 14.</span>
+                </div>
+                <div class="question-text">(Trong không gian đa thức bậc ≤ 2, span của ({1, x}) là tập hợp các đa thức có dạng:)</div>
+                <div class="options" data-qidx="13">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q13" value="0" id="q13_opt0">
+                        <label for="q13_opt0">A. ((a + bx + cx^2))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q13" value="1" id="q13_opt1">
+                        <label for="q13_opt1">B. ((a + bx))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q13" value="2" id="q13_opt2">
+                        <label for="q13_opt2">C. ((bx))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q13" value="3" id="q13_opt3">
+                        <label for="q13_opt3">D. ((ax^2))</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="14">
+                <div class="question-title">
+                    <span class="badge badge-trungbinh">Trung bình</span>
+                    <span style="font-weight:600;">Câu 15.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^2), nếu span({ec{v}, ec{w}}) = một đường thẳng, điều gì đúng về (ec{v}) và (ec{w})?)</div>
+                <div class="options" data-qidx="14">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q14" value="0" id="q14_opt0">
+                        <label for="q14_opt0">A. (Chúng vuông góc)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q14" value="1" id="q14_opt1">
+                        <label for="q14_opt1">B. (Chúng cùng phương)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q14" value="2" id="q14_opt2">
+                        <label for="q14_opt2">C. (Chúng đối nhau)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q14" value="3" id="q14_opt3">
+                        <label for="q14_opt3">D. (Chúng độc lập)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="15">
+                <div class="question-title">
+                    <span class="badge badge-kho">Khó</span>
+                    <span style="font-weight:600;">Câu 16.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^3), cho (mathbf{a} = (1,0,1)), (mathbf{b} = (0,1,1)), (mathbf{c} = (1,1,2)). Hãy tìm số chiều của span({mathbf{a},mathbf{b},mathbf{c}}).)</div>
+                <div class="options" data-qidx="15">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q15" value="0" id="q15_opt0">
+                        <label for="q15_opt0">A. (1)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q15" value="1" id="q15_opt1">
+                        <label for="q15_opt1">B. (2)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q15" value="2" id="q15_opt2">
+                        <label for="q15_opt2">C. (3)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q15" value="3" id="q15_opt3">
+                        <label for="q15_opt3">D. (0)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="16">
+                <div class="question-title">
+                    <span class="badge badge-kho">Khó</span>
+                    <span style="font-weight:600;">Câu 17.</span>
+                </div>
+                <div class="question-text">(Cho không gian vectơ (V = mathbb{R}^3). Tìm tập hợp nào dưới đây KHÔNG phải là span của một tập hợp hữu hạn vectơ?)</div>
+                <div class="options" data-qidx="16">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q16" value="0" id="q16_opt0">
+                        <label for="q16_opt0">A. (Mặt phẳng (x + y + z = 0))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q16" value="1" id="q16_opt1">
+                        <label for="q16_opt1">B. (Đường thẳng (x = y = z))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q16" value="2" id="q16_opt2">
+                        <label for="q16_opt2">C. (Tập hợp các điểm có (x^2 + y^2 + z^2 = 1))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q16" value="3" id="q16_opt3">
+                        <label for="q16_opt3">D. (Gốc tọa độ)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="17">
+                <div class="question-title">
+                    <span class="badge badge-kho">Khó</span>
+                    <span style="font-weight:600;">Câu 18.</span>
+                </div>
+                <div class="question-text">(Trong (mathbb{R}^4), cho (mathbf{v}_1 = (1,1,0,0)), (mathbf{v}_2 = (0,1,1,0)), (mathbf{v}_3 = (0,0,1,1)). Tìm điều kiện của (mathbf{b} = (b_1,b_2,b_3,b_4)) để (mathbf{b}) thuộc span của ba vectơ này.)</div>
+                <div class="options" data-qidx="17">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q17" value="0" id="q17_opt0">
+                        <label for="q17_opt0">A. ((b_1 - b_2 + b_3 - b_4 = 0))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q17" value="1" id="q17_opt1">
+                        <label for="q17_opt1">B. ((b_1 + b_2 + b_3 + b_4 = 0))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q17" value="2" id="q17_opt2">
+                        <label for="q17_opt2">C. ((b_1 = b_2 = b_3 = b_4))</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q17" value="3" id="q17_opt3">
+                        <label for="q17_opt3">D. (Không có ràng buộc)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="18">
+                <div class="question-title">
+                    <span class="badge badge-kho">Khó</span>
+                    <span style="font-weight:600;">Câu 19.</span>
+                </div>
+                <div class="question-text">(Cho (S = {mathbf{u}, mathbf{v}, mathbf{w}}) trong (mathbb{R}^2) với (mathbf{u} = (1,2)), (mathbf{v} = (2,4)), (mathbf{w} = (3,6)). Span(S) có số chiều bằng:)</div>
+                <div class="options" data-qidx="18">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q18" value="0" id="q18_opt0">
+                        <label for="q18_opt0">A. (0)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q18" value="1" id="q18_opt1">
+                        <label for="q18_opt1">B. (1)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q18" value="2" id="q18_opt2">
+                        <label for="q18_opt2">C. (2)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q18" value="3" id="q18_opt3">
+                        <label for="q18_opt3">D. (3)</label>
+                    </div>
+                
+                </div>
+                
+            </div><div class="question-card" data-idx="19">
+                <div class="question-title">
+                    <span class="badge badge-kho">Khó</span>
+                    <span style="font-weight:600;">Câu 20.</span>
+                </div>
+                <div class="question-text">(Trong không gian các hàm số thực, xét các hàm (f(x)=1), (g(x)=x), (h(x)=x^2). Span của ({f,g,h}) là:)</div>
+                <div class="options" data-qidx="19">
+                    
+                    <div class="option" data-optidx="0">
+                        <input type="radio" name="q19" value="0" id="q19_opt0">
+                        <label for="q19_opt0">A. (Các hàm bậc nhất)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="1">
+                        <input type="radio" name="q19" value="1" id="q19_opt1">
+                        <label for="q19_opt1">B. (Các hàm bậc hai)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="2">
+                        <input type="radio" name="q19" value="2" id="q19_opt2">
+                        <label for="q19_opt2">C. (Các đa thức bậc ≤ 2)</label>
+                    </div>
+                
+                    <div class="option" data-optidx="3">
+                        <input type="radio" name="q19" value="3" id="q19_opt3">
+                        <label for="q19_opt3">D. (Các hàm liên tục)</label>
+                    </div>
+                
+                </div>
+                
+            </div></div>
+    <footer>⚡ Mỗi câu hiện ngay kết quả sau khi chọn | Dùng MathJax | Tư duy đại số tuyến tính theo DUYMT</footer>
+</div>
+
+<script>
+    // ----------------------------- DỮ LIỆU 20 CÂU (5 lý thuyết + 5 dễ + 5 TB + 5 khó) -----------------------------------
+    const questionsData = [
+        // ==================== 5 LÝ THUYẾT ====================
+        { text: "Span (bao tuyến tính) của một tập hợp các vectơ là gì?",
+          options: ["Tập hợp các vectơ vuông góc với chúng", "Tập hợp tất cả các tổ hợp tuyến tính của chúng", "Tập hợp các vectơ có độ dài bằng 1", "Tập hợp các vectơ song song với nhau"],
+          correct: 1, explanation: "Span được định nghĩa là tập tất cả các tổ hợp tuyến tính của các vectơ đã cho.", tip: "Nhớ: Span = 'pha trộn' bằng cách nhân với số rồi cộng." },
+        { text: "Phát biểu nào sau đây đúng về span của một vectơ \(\vec{v} \neq \vec{0}\) trong \(\mathbb{R}^2\)?",
+          options: ["Span là toàn bộ mặt phẳng", "Span là đường thẳng đi qua gốc tọa độ theo hướng \(\vec{v}\)", "Span chỉ gồm vectơ \(\vec{v}\)", "Span là một điểm"],
+          correct: 1, explanation: "Mọi tổ hợp tuyến tính \(c\vec{v}\) đều nằm trên đường thẳng qua gốc có hướng \(\vec{v}\).", tip: "Hình dung: chỉ một màu cơ bản thì chỉ pha ra các sắc độ của màu đó." },
+        { text: "Nếu thêm một vectơ đã thuộc span của tập hợp ban đầu vào tập đó, span mới như thế nào?",
+          options: ["Mở rộng ra không gian lớn hơn", "Thu hẹp lại", "Không thay đổi", "Trở thành không gian 0"],
+          correct: 2, explanation: "Vectơ thêm vào đã là tổ hợp tuyến tính của các vectơ cũ nên không sinh thêm hướng mới.", tip: "Span chỉ mở rộng khi thêm vectơ độc lập tuyến tính." },
+        { text: "Điều kiện cần và đủ để hệ phương trình \(A\mathbf{x} = \mathbf{b}\) có nghiệm là:",
+          options: ["\(\mathbf{b} = \mathbf{0}\)", "\(\mathbf{b}\) vuông góc với mọi cột của A", "\(\mathbf{b}\) thuộc span của các cột của A", "A phải là ma trận vuông"],
+          correct: 2, explanation: "Hệ có nghiệm khi và chỉ khi \(\mathbf{b}\) nằm trong không gian cột của A, tức span của các vectơ cột.", tip: "Đây là định lý cơ bản: \(\mathbf{b}\) phải là tổ hợp tuyến tính của các cột." },
+        { text: "Trong không gian \(\mathbb{R}^3\), span của ba vectơ \(\{(1,0,0), (0,1,0), (0,0,1)\}\) là gì?",
+          options: ["Một mặt phẳng", "Một đường thẳng", "Toàn bộ \(\mathbb{R}^3\)", "Chỉ gốc tọa độ"],
+          correct: 2, explanation: "Ba vectơ này độc lập tuyến tính và tạo thành cơ sở chính tắc, span ra toàn bộ \(\mathbb{R}^3\).", tip: "Số chiều của span bằng hạng của ma trận tạo từ các vectơ." },
+        // ==================== 5 CÂU DỄ ====================
+        { text: "Trong \(\mathbb{R}^2\), cho \(\vec{u} = (1, 2)\). Span của \(\vec{u}\) là:",
+          options: ["Đường thẳng \(y = 2x\)", "Đường thẳng \(y = x\)", "Mặt phẳng \(\mathbb{R}^2\)", "Điểm (0,0)"],
+          correct: 0, explanation: "Mọi vectơ trong span có dạng \(t(1,2) = (t, 2t)\), tức \(y = 2x\).", tip: "Đường thẳng qua gốc với hệ số góc 2." },
+        { text: "Cho \(\vec{v}_1 = (2, 4)\) và \(\vec{v}_2 = (3, 6)\). Span của hai vectơ này là:",
+          options: ["Toàn bộ \(\mathbb{R}^2\)", "Một đường thẳng", "Một mặt phẳng", "Gốc tọa độ"],
+          correct: 1, explanation: "\(\vec{v}_2 = 1.5 \vec{v}_1\) nên chúng cùng phương, span chỉ là đường thẳng.", tip: "Nếu hai vectơ tỷ lệ, span là đường thẳng." },
+        { text: "Vectơ \(\mathbf{b} = (4, -2)\) có thuộc span\(\{(1, 0), (0, 1)\}\) không?",
+          options: ["Có", "Không", "Chỉ khi nhân với 0", "Không xác định"],
+          correct: 0, explanation: "Hai vectơ (1,0) và (0,1) span ra toàn bộ \(\mathbb{R}^2\), nên mọi vectơ đều thuộc.", tip: "Bộ cơ sở chính tắc sinh ra cả mặt phẳng." },
+        { text: "Trong \(\mathbb{R}^3\), span của \(\{(1,0,0), (0,1,0)\}\) là:",
+          options: ["Mặt phẳng Oxy", "Đường thẳng Oz", "Toàn bộ \(\mathbb{R}^3\)", "Gốc tọa độ"],
+          correct: 0, explanation: "Hai vectơ sinh ra mặt phẳng z = 0 (mặt phẳng Oxy).", tip: "Thiếu thành phần thứ ba nên không thể tạo ra điểm có z ≠ 0." },
+        { text: "Cho \(S = \{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) trong \(\mathbb{R}^2\). Số chiều tối đa của span(S) có thể là:",
+          options: ["1", "2", "3", "0"],
+          correct: 1, explanation: "Trong \(\mathbb{R}^2\), số chiều không vượt quá 2, dù có bao nhiêu vectơ.", tip: "Chiều của span ≤ số chiều của không gian chứa nó." },
+        // ==================== 5 CÂU TRUNG BÌNH ====================
+        { text: "Trong \(\mathbb{R}^2\), cho \(\vec{u} = (2, 1)\) và \(\vec{v} = (-1, 3)\). Hãy tìm span của chúng.",
+          options: ["Đường thẳng \(y = x/2\)", "Đường thẳng \(y = -3x\)", "Toàn bộ \(\mathbb{R}^2\)", "Một điểm"],
+          correct: 2, explanation: "Hai vectơ không tỷ lệ (kiểm tra \(2/ -1 \neq 1/3\)), nên độc lập tuyến tính, span ra toàn bộ mặt phẳng.", tip: "Hai vectơ không cùng phương trong mặt phẳng sẽ sinh ra cả mặt phẳng." },
+        { text: "Xác định xem vectơ \(\mathbf{b} = (3, 2, 1)\) có thuộc span\(\{(1,0,0), (0,1,0)\}\) không?",
+          options: ["Có", "Không", "Chỉ khi bỏ tọa độ cuối", "Có thể"],
+          correct: 1, explanation: "Mọi vectơ trong span này có dạng \((a, b, 0)\), thành phần thứ ba luôn bằng 0, trong khi b = (3,2,1) có thành phần thứ ba bằng 1, nên không thuộc.", tip: "Kiểm tra tọa độ bị triệt tiêu." },
+        { text: "Cho \(\vec{v}_1 = (1,1,1)\), \(\vec{v}_2 = (1,-1,0)\). Span của hai vectơ này trong \(\mathbb{R}^3\) có số chiều là:",
+          options: ["1", "2", "3", "0"],
+          correct: 1, explanation: "Hai vectơ không tỷ lệ nên độc lập tuyến tính, số chiều bằng 2 (một mặt phẳng qua gốc).", tip: "Số chiều = số vectơ độc lập tối đa." },
+        { text: "Trong không gian đa thức bậc ≤ 2, span của \(\{1, x\}\) là tập hợp các đa thức có dạng:",
+          options: ["\(a + bx + cx^2\)", "\(a + bx\)", "\(bx\)", "\(ax^2\)"],
+          correct: 1, explanation: "Tổ hợp tuyến tính \(c_1\cdot 1 + c_2\cdot x = c_1 + c_2 x\), bậc không quá 1, không có \(x^2\).", tip: "Các đa thức bậc ≤ 1." },
+        { text: "Trong \(\mathbb{R}^2\), nếu span\(\{\vec{v}, \vec{w}\}\) = một đường thẳng, điều gì đúng về \(\vec{v}\) và \(\vec{w}\)?",
+          options: ["Chúng vuông góc", "Chúng cùng phương", "Chúng đối nhau", "Chúng độc lập"],
+          correct: 1, explanation: "Span là đường thẳng chỉ khi hai vectơ cùng phương (một vectơ là bội của vectơ kia).", tip: "Cùng phương = phụ thuộc tuyến tính." },
+        // ==================== 5 CÂU KHÓ ====================
+        { text: "Trong \(\mathbb{R}^3\), cho \(\mathbf{a} = (1,0,1)\), \(\mathbf{b} = (0,1,1)\), \(\mathbf{c} = (1,1,2)\). Hãy tìm số chiều của span\(\{\mathbf{a},\mathbf{b},\mathbf{c}\}\).",
+          options: ["1", "2", "3", "0"],
+          correct: 2, explanation: "Nhận thấy \(\mathbf{c} = \mathbf{a} + \mathbf{b}\), nên ba vectơ phụ thuộc tuyến tính, nhưng \(\mathbf{a}\) và \(\mathbf{b}\) độc lập (không tỷ lệ). Vậy span có số chiều 2.", tip: "Tìm hạng của ma trận tạo bởi các vectơ." },
+        { text: "Cho không gian vectơ \(V = \mathbb{R}^3\). Tìm tập hợp nào dưới đây KHÔNG phải là span của một tập hợp hữu hạn vectơ?",
+          options: ["Mặt phẳng \(x + y + z = 0\)", "Đường thẳng \(x = y = z\)", "Tập hợp các điểm có \(x^2 + y^2 + z^2 = 1\)", "Gốc tọa độ"],
+          correct: 2, explanation: "Mặt cầu không phải không gian con (không chứa gốc, không đóng với phép cộng). Span luôn là không gian con.", tip: "Span bao giờ cũng là không gian con tuyến tính." },
+        { text: "Trong \(\mathbb{R}^4\), cho \(\mathbf{v}_1 = (1,1,0,0)\), \(\mathbf{v}_2 = (0,1,1,0)\), \(\mathbf{v}_3 = (0,0,1,1)\). Tìm điều kiện của \(\mathbf{b} = (b_1,b_2,b_3,b_4)\) để \(\mathbf{b}\) thuộc span của ba vectơ này.",
+          options: ["\(b_1 - b_2 + b_3 - b_4 = 0\)", "\(b_1 + b_2 + b_3 + b_4 = 0\)", "\(b_1 = b_2 = b_3 = b_4\)", "Không có ràng buộc"],
+          correct: 0, explanation: "Giải hệ tổ hợp tuyến tính, dẫn đến phương trình \(b_1 - b_2 + b_3 - b_4 = 0\).", tip: "Đưa ma trận về dạng bậc thang, tìm điều kiện nghiệm." },
+        { text: "Cho \(S = \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}\) trong \(\mathbb{R}^2\) với \(\mathbf{u} = (1,2)\), \(\mathbf{v} = (2,4)\), \(\mathbf{w} = (3,6)\). Span(S) có số chiều bằng:",
+          options: ["0", "1", "2", "3"],
+          correct: 1, explanation: "Cả ba vectơ đều cùng phương (vì \(\mathbf{v}=2\mathbf{u}, \mathbf{w}=3\mathbf{u}\)), nên span chỉ là đường thẳng, chiều 1.", tip: "Dù có nhiều vectơ, nếu tất cả cùng phương thì chỉ sinh ra một đường thẳng." },
+        { text: "Trong không gian các hàm số thực, xét các hàm \(f(x)=1\), \(g(x)=x\), \(h(x)=x^2\). Span của \(\{f,g,h\}\) là:",
+          options: ["Các hàm bậc nhất", "Các hàm bậc hai", "Các đa thức bậc ≤ 2", "Các hàm liên tục"],
+          correct: 2, explanation: "Mọi tổ hợp \(a\cdot 1 + b\cdot x + c\cdot x^2\) là đa thức bậc không quá 2, và ngược lại.", tip: "Đây chính là cơ sở của không gian đa thức bậc ≤ 2." }
+    ];
+
+    // Đảm bảo 20 câu
+    console.assert(questionsData.length === 20, "Số câu hỏi phải là 20");
+
+    let userAnswers = new Array(20).fill(null);
+    let answerStatus = new Array(20).fill(null); // 'correct', 'wrong', null
+
+    function renderQuestions() {
+        const container = document.getElementById('questionsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            let difficultyClass = '';
+            let difficultyText = '';
+            if (idx < 5) { difficultyClass = 'badge-lythuyet'; difficultyText = 'Lý thuyết'; }
+            else if (idx < 10) { difficultyClass = 'badge-de'; difficultyText = 'Dễ'; }
+            else if (idx < 15) { difficultyClass = 'badge-trungbinh'; difficultyText = 'Trung bình'; }
+            else { difficultyClass = 'badge-kho'; difficultyText = 'Khó'; }
+
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.setAttribute('data-idx', idx);
+            
+            const selectedVal = userAnswers[idx];
+            const isCorrect = answerStatus[idx] === 'correct';
+            const isWrong = answerStatus[idx] === 'wrong';
+            
+            let feedbackHtml = '';
+            if (selectedVal !== null) {
+                const correctAnsLetter = String.fromCharCode(65 + q.correct);
+                const correctAnswerText = q.options[q.correct];
+                const statusClass = isCorrect ? 'correct' : 'wrong';
+                feedbackHtml = `
+                    <div class="feedback ${statusClass}">
+                        <div><span class="ans">📌 Đáp án đúng: ${correctAnsLetter}. ${correctAnswerText}</span></div>
+                        <div>📖 ${q.explanation}</div>
+                        <div class="tip">⚡ Mẹo nhanh: ${q.tip}</div>
+                    </div>
+                `;
+            }
+            
+            // Tạo options
+            let optionsHtml = '';
+            q.options.forEach((opt, optIdx) => {
+                const checkedAttr = (selectedVal === optIdx) ? 'checked' : '';
+                // Hiển thị công thức MathJax trong nhãn
+                optionsHtml += `
+                    <div class="option" data-optidx="${optIdx}">
+                        <input type="radio" name="q${idx}" value="${optIdx}" id="q${idx}_opt${optIdx}" ${checkedAttr}>
+                        <label for="q${idx}_opt${optIdx}">${String.fromCharCode(65+optIdx)}. \(${opt}\)</label>
+                    </div>
+                `;
+            });
+            
+            card.innerHTML = `
+                <div class="question-title">
+                    <span class="badge ${difficultyClass}">${difficultyText}</span>
+                    <span style="font-weight:600;">Câu ${idx+1}.</span>
+                </div>
+                <div class="question-text">\(${q.text}\)</div>
+                <div class="options" data-qidx="${idx}">
+                    ${optionsHtml}
+                </div>
+                ${feedbackHtml}
+            `;
+            container.appendChild(card);
+        });
+        attachEvents();
+        updateScore();
+        if (window.MathJax) MathJax.typesetPromise();
+    }
+    
+    function attachEvents() {
+        document.querySelectorAll('.option').forEach(optDiv => {
+            const radio = optDiv.querySelector('input[type="radio"]');
+            if (!radio) return;
+            radio.removeEventListener('change', handleRadioChange);
+            radio.addEventListener('change', handleRadioChange);
+        });
+    }
+    
+    function handleRadioChange(e) {
+        const radio = e.target;
+        const qDiv = radio.closest('.question-card');
+        const idx = parseInt(qDiv.getAttribute('data-idx'));
+        const selected = parseInt(radio.value);
+        const isCorrect = (selected === questionsData[idx].correct);
+        userAnswers[idx] = selected;
+        answerStatus[idx] = isCorrect ? 'correct' : 'wrong';
+        renderQuestions(); // re-render để hiện feedback
+        updateScore();
+    }
+    
+    function updateScore() {
+        let correctCount = 0;
+        for (let i = 0; i < answerStatus.length; i++) {
+            if (answerStatus[i] === 'correct') correctCount++;
+        }
+        const scoreSpan = document.getElementById('scoreDisplay');
+        if (scoreSpan) scoreSpan.innerText = `${correctCount} / 20`;
+    }
+    
+    function resetAll() {
+        userAnswers.fill(null);
+        answerStatus.fill(null);
+        renderQuestions();
+    }
+    
+    function downloadHTML() {
+        // Lấy nội dung HTML hiện tại (kể cả trạng thái đã chọn) nhưng để reset? Thường nên tải bản gốc hoặc bản có đáp án? 
+        // Yêu cầu: tải file đề thi (có thể giữ lại câu hỏi, không cần lưu đáp án đã chọn). 
+        // Tạo một bản sao tĩnh từ document hiện tại nhưng loại bỏ trạng thái đã chọn? 
+        // Để đơn giản, tôi sẽ clone container và lưu toàn bộ trang.
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = 'trac_nghiem_span_DUYMT.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+    
+    const resetBtn = document.getElementById('resetBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetAll);
+    if (downloadBtn) downloadBtn.addEventListener('click', downloadHTML);
+    
+    renderQuestions();
+</script>
+
+</body></html>
